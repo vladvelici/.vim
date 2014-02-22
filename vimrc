@@ -11,3 +11,9 @@ autocmd FileType go autocmd BufWritePre <buffer> Fmt
 nnoremap <C-h>     :tabprevious<CR>
 nnoremap <C-j>     :tabnext<CR>
 nnoremap <C-t>     :tabnew<CR>
+
+" .swp files in .vim/...
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+
+set copyindent
