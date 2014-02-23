@@ -3,7 +3,6 @@ filetype plugin indent off
 set runtimepath+=$GOROOT/misc/vim
 filetype plugin indent on
 syntax on
-
 set nu
 
 autocmd FileType go autocmd BufWritePre <buffer> Fmt
@@ -11,13 +10,15 @@ autocmd FileType go autocmd BufWritePre <buffer> Fmt
 set runtimepath+=$HOME/Projects/vimfiles/rtp
 
 " OCaml
-au BufRead,BufNewFile *.ml,*.mli compiler ocaml
-
 let g:ocp_indent_vimfile = system("opam config var share")
 let g:ocp_indent_vimfile = substitute(g:ocp_indent_vimfile, '[\r\n]*$', '', '')
 let g:ocp_indent_vimfile = g:ocp_indent_vimfile . "/vim/syntax/ocp-indent.vim"
 
 autocmd FileType ocaml exec ":source " . g:ocp_indent_vimfile
+" autocmd FileType ocaml autocmd BufWritePre <buffer> call OcpIndentBuffer()
+autocmd FileType ocaml command! -buffer Fmt call OcpIndentBuffer()
+
+" au BufRead,BufNewFile *.ml,*.mli compiler ocaml
 
 " Tabs
 nnoremap <C-h>     :tabprevious<CR>
@@ -28,12 +29,20 @@ nnoremap <C-t>     :tabnew<CR>
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 
+" Indentation
 set copyindent
+set softtabstop=4
 set backspace=indent,eol,start
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+" visual spacing
+set list
+set listchars=tab:▸\ ,trail:•,extends:❯,precedes:❮
+set showbreak=↪\
 
 set hlsearch
-
-
 
 " this enables "visual" wrapping
 set wrap
