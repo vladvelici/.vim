@@ -42,13 +42,31 @@ set list
 set listchars=tab:▸\ ,trail:•,extends:❯,precedes:❮
 set showbreak=↪\
 
+" searching
 set hlsearch
+set incsearch
+nnoremap <CR> :noh<CR><CR>
 
 " this enables "visual" wrapping
-set wrap
+set wrap linebreak nolist
 
 " this turns off physical line wrapping (ie: automatic insertion of newlines)
-set textwidth=0 wrapmargin=0
+set textwidth=0
+set wrapmargin=0
+
+" visual wrapping and no line break for all filetypes
+" http://superuser.com/a/256850/187715
+" Disable annoying auto line break
+fu! local:disableBr()
+  set wrap
+  set linebreak
+  set nolist  " list disables linebreak
+  set textwidth=0
+  set wrapmargin=0
+  set fo-=t
+endfu
+" Disable line breaks for all file types
+:au BufNewFile,BufRead *.* call local:disableBr()
 
 " Navigation between soft lines
 map <silent> <Up> gk
@@ -74,3 +92,5 @@ inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Es
 inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
             \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
 
+
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
