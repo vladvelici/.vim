@@ -1,3 +1,17 @@
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+
+call vundle#end()
+
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'fatih/vim-go'
+
+filetype plugin indent on
+
 " Line numbers
 set nu
 
