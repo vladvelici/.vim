@@ -1,13 +1,8 @@
-filetype off
-filetype plugin indent off
-set runtimepath+=$GOROOT/misc/vim
-filetype plugin indent on
-syntax on
+" Line numbers
 set nu
 
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
-
-set runtimepath+=$HOME/Projects/vimfiles/rtp
+" Syntax highlight
+syntax on
 
 " OCaml
 let g:ocp_indent_vimfile = system("opam config var share")
@@ -57,7 +52,7 @@ set wrapmargin=0
 " visual wrapping and no line break for all filetypes
 " http://superuser.com/a/256850/187715
 " Disable annoying auto line break
-fu! local:disableBr()
+fu! DisableBr()
   set wrap
   set linebreak
   set nolist  " list disables linebreak
@@ -66,7 +61,7 @@ fu! local:disableBr()
   set fo-=t
 endfu
 " Disable line breaks for all file types
-:au BufNewFile,BufRead *.* call local:disableBr()
+:au BufNewFile,BufRead *.* call DisableBr()
 
 " Navigation between soft lines
 map <silent> <Up> gk
@@ -78,19 +73,3 @@ imap <silent> <home> <C-o>g<home>
 map <silent> <End> g<End>
 imap <silent> <End> <C-o>g<End>
 
-" autocomplete
-set completeopt=longest,menuone
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-" open omni completion menu closing previous if open and opening new menu without changing the text
-inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
-            \ '<C-x><C-o><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
-" open user completion menu closing previous if open and opening new menu without changing the text
-inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
-            \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
-
-
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
