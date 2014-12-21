@@ -4,11 +4,10 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-
-call vundle#end()
-
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
+
+call vundle#end()
 
 filetype plugin indent on
 
@@ -87,3 +86,10 @@ imap <silent> <home> <C-o>g<home>
 map <silent> <End> g<End>
 imap <silent> <End> <C-o>g<End>
 
+" Go more highlighting
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+
+" Auto-close the preview window after autocompletion
+autocmd CompleteDone * pclose
