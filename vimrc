@@ -6,6 +6,7 @@ call vundle#begin()
 
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
+Plugin 'othree/html5.vim'
 
 call vundle#end()
 
