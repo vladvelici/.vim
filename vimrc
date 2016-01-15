@@ -7,6 +7,10 @@ call vundle#begin()
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
 Plugin 'othree/html5.vim'
+" CoVim
+" Plugin 'FredKSchott/CoVim'
+
+Plugin 'def-lkb/ocp-indent-vim'
 
 call vundle#end()
 
@@ -19,11 +23,13 @@ set nu
 syntax on
 
 " OCaml
-let g:ocp_indent_vimfile = system("opam config var share")
-let g:ocp_indent_vimfile = substitute(g:ocp_indent_vimfile, '[\r\n]*$', '', '')
-let g:ocp_indent_vimfile = g:ocp_indent_vimfile . "/vim/syntax/ocp-indent.vim"
+" let g:ocp_indent_vimfile = system("opam config var share")
+" let g:ocp_indent_vimfile = substitute(g:ocp_indent_vimfile, '[\r\n]*$', '', '')
+" let g:ocp_indent_vimfile = g:ocp_indent_vimfile . "/vim/syntax/ocp-indent.vim"
 
-autocmd FileType ocaml exec ":source " . g:ocp_indent_vimfile
+set rtp+=</Users/vlad/.vim/bundle/ocp-indent-vim>
+
+" autocmd FileType ocaml exec ":source " . g:ocp_indent_vimfile
 " autocmd FileType ocaml autocmd BufWritePre <buffer> call OcpIndentBuffer()
 autocmd FileType ocaml command! -buffer Fmt call OcpIndentBuffer()
 
@@ -78,14 +84,14 @@ endfu
 :au BufNewFile,BufRead *.* call DisableBr()
 
 " Navigation between soft lines
-map <silent> <Up> gk
-imap <silent> <Up> <C-o>gk
-map <silent> <Down> gj
-imap <silent> <Down> <C-o>gj
-map <silent> <home> g<home>
-imap <silent> <home> <C-o>g<home>
-map <silent> <End> g<End>
-imap <silent> <End> <C-o>g<End>
+onoremap <silent> <Up> gk
+inoremap <silent> <Up> <C-o>g<Up>
+onoremap <silent> <Down> gj
+inoremap <silent> <Down> <C-o>g<Down>
+onoremap <silent> <home> g<home>
+inoremap <silent> <home> <C-o>g<home>
+onoremap <silent> <End> g<End>
+inoremap <silent> <End> <C-o>g<End>
 
 " Go more highlighting
 let g:go_highlight_functions = 1
@@ -94,3 +100,4 @@ let g:go_highlight_structs = 1
 
 " Auto-close the preview window after autocompletion
 autocmd CompleteDone * pclose
+

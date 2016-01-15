@@ -21,4 +21,8 @@ updateVundle:
 	cd ${BUNDLES_DIR}Vundle.vim
 	git pull
 
+update:
+	vim +PluginUpdate +PluginInstall!
 
+symlink:
+	ln -s ./vimrc ~/.vimrc
