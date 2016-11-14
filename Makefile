@@ -7,7 +7,7 @@ VDIR=${BUNDLES_DIR}Vundle.vim
 # Makefile directory
 HERE=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-all: vundle plugins symlink folders
+all: vundle symlink folders plugins
 
 # Install Vundle plugins
 plugins:
