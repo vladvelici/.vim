@@ -4,7 +4,10 @@ BUNDLES_DIR=~/.vim/bundle/
 # Vundle plugin directory
 VDIR=${BUNDLES_DIR}Vundle.vim
 
-all: vundle plugins
+# Makefile directory
+HERE=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+
+all: vundle plugins symlink folders
 
 # Install Vundle plugins
 plugins:
@@ -25,4 +28,8 @@ update:
 	vim +PluginUpdate +PluginInstall!
 
 symlink:
-	ln -s ./vimrc ~/.vimrc
+	cd ~ && pwd && ln -s ${HERE}/vimrc .vimrc
+
+folders:
+	mkdir -p ~/.vim/backup
+	mkdir -p ~/.vim/swap
